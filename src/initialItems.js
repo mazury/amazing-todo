@@ -1,4 +1,4 @@
-const items = [
+const initialItems = [
 	{
 		title: "item1",
 		done: false,
@@ -14,5 +14,5 @@ const items = [
 ];
 
 module.exports = {
-	items,
+	initialItems,
 };
