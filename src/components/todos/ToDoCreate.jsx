@@ -1,29 +1,30 @@
 import { AddIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React, { useState } from "react";
 
 const ToDoCreate = ({ createTask }) => {
-    const userInput = useRef();
+    const [userInput, setUserInput] = useState("");
 
-    // const handleChange = (e)=> {
-    //     setUserInput(e.currentTarget.value);
-    // }
+    function handleChange(e) {
+        setUserInput(e.currentTarget.value);
+    }
 
-    const handleSubmit = (e)=> {
+    function handleSubmit(e) {
         e.preventDefault();
-        createTask(userInput.current.value);
-        userInput.current.value = ""
+        createTask(userInput);
+        setUserInput("");
     }
 
     return (
-        <form onSubmit={(e)=>handleSubmit(e)}>
+        <form onSubmit={handleSubmit}>
             <InputGroup>
                 <InputLeftElement
                     pointerEvents="none"
                     children={<AddIcon color="gray.300" />}
                 />
                 <Input
-                    ref={userInput}
+                    value={userInput}
+                    onChange={handleChange}
                     placeholder="Add task and press enter to save"
                 />
             </InputGroup>
