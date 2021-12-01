@@ -1,9 +1,14 @@
 import React from "react";
 import ToDoItem from "./ToDoItem";
 
-const ToDoItemsList = ({ items }) => {
+const ToDoItemsList = ({ items, handleDoneCheck }) => {
     return items.map((item) => {
-        return <ToDoItem title={item.title} />;
+        return (
+            <ToDoItem
+                item={item}
+                handleChange={handleDoneCheck}
+            />
+        );
     });
 };
 

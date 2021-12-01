@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ToDoCreate from "../components/todos/ToDoCreate";
-import ToDoList from "../components/todos/ToDoItemsList";
+import ToDoItemsList from "../components/todos/ToDoItemsList";
 import { initialItems } from "../initialItems";
 
 const ToDoScreen = () => {
@@ -9,15 +9,38 @@ const ToDoScreen = () => {
     function createTask(userInput) {
         const newItem = {
             title: userInput,
-            done: false
+            isDone: false
         };
         setItems([newItem, ...items]);
+    }
+
+    function handleDoneCheck(id) {
+        const newItems = items.map((item) => {
+            return item.id === id ? { ...item, isDone: !item.isDone } : item;
+        });
+        setItems(newItems);
+    }
+
+    function getDoneItems() {
+        return items.filter((item) => item.isDone);
+    }
+
+    function getUndoneItems() {
+        return items.filter((item) => !item.isDone);
     }
 
     return (
         <div>
             <ToDoCreate createTask={createTask} />
-            <ToDoList items={items} />
+            <ToDoItemsList
+                items={getUndoneItems()}
+                handleDoneCheck={handleDoneCheck}
+            />
+            <h2>Done:</h2>
+            <ToDoItemsList
+                items={getDoneItems()}
+                handleDoneCheck={handleDoneCheck}
+            />
         </div>
     );
 };

@@ -1,10 +1,13 @@
 import React from "react";
 import { Checkbox } from "@chakra-ui/react";
 
-const ToDoItem = ({ title }) => {
+const ToDoItem = ({ item, handleChange }) => {
+    const { title, isDone, id } = item;
     return (
         <div>
-            <Checkbox>{title}</Checkbox>
+            <Checkbox isChecked={isDone} onChange={() => handleChange(id)}>
+                {isDone ? <strike>{title}</strike> : title}
+            </Checkbox>
         </div>
     );
 };
